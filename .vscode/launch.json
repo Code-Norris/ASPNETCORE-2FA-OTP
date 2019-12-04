@@ -8,22 +8,30 @@
             "name": "Debug API",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/ASPNETCore-OTP-SMS/OTPSMS.API/bin/Debug/netcoreapp3.0/OTPSMS.API.dll",
+            "preLaunchTask": "build API",
+            "program": "${workspaceFolder}/2FAOTP.Web.API/bin/Debug/netcoreapp3.0/TwoFAOTP.Web.API.exe",
             "args": [],
-            "cwd": "${workspaceFolder}/ASPNETCore-OTP-SMS/OTPSMS.API",
+            "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
-            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"                
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url}",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "env": "dev"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
+                "/Views": "${workspaceRoot}/Views"
             }
         },
         {

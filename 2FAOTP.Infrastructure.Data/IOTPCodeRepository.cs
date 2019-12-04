@@ -8,5 +8,10 @@ namespace TwoFAOTP.Infrastructure.Data
         void SaveSendCodeInfo
             (string uniqueUserName, string otpCode, string phoneNumber,
              int otpExpiryInSeconds, DateTime otpCodeGenTime);
+
+        OTPCodeInfo GetOTPSentInfo
+            (string uniqueUserName, string otpCode, string phoneNumber);
+
+        void UpdateSendCodeInfo(OTPCodeInfo otpCodeInfo);
     }
 }

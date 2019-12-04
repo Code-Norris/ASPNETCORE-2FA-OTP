@@ -10,6 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Raven.Client.Documents.Session;
+using Serilog.Core;
+using TwoFAOTP.Common.Secret;
+using TwoFAOTP.Infrastructure.AuthFactor;
+using TwoFAOTP.Infrastructure.Data;
 
 namespace TwoFAOTP.Web.API
 {
@@ -25,7 +30,20 @@ namespace TwoFAOTP.Web.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Secret secret = SecretManager.GetSecret();
 
+            IDocumentSession ravendb =
+                RavenDbInitializer.Init(secret.RavenDbFilePath, secret.RavenDbServerUrl);
+
+            services.AddTransient<IAuthFactor>(sp => {
+                return new SMSAuthFactorService(secret.TwilioAccountId, secret.TwilioAuthToken);
+            });
+
+            services.AddSingleton(typeof(IDocumentSession), sp => {return ravendb; });
+
+            services.AddSingleton<IOTPCodeRepository>(sp => {
+                return new OTPCodeRepository(ravendb);
+            });
             
             services.AddControllers();
         }
