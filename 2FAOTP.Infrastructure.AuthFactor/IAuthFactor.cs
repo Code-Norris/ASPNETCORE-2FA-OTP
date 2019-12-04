@@ -5,6 +5,6 @@ namespace OTPSMS.Infrastructure.AuthFactor
 {
     public interface IAuthFactor
     {
-        Task SendCode(string code);
+        void SendCode(string smsMessage, string recipientPhoneNumber);
     }
 }

@@ -2,41 +2,52 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/ASPNETCore-OTP-SMS/OTPSMS.API/OTPSMS.API.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
+            "label": "build API",
+            "command": "dotnet build",
+            "type": "shell",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/2FAOTP.Web.API",
+                "env": {
+                }
+            },
+            "problemMatcher": []
         },
         {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/ASPNETCore-OTP-SMS/OTPSMS.API/OTPSMS.API.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
+            "label": "build Secret",
+            "command": "dotnet build",
+            "type": "shell",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/2FAOTP.Common.Secret",
+                "env": {
+                }
+            },
+            "problemMatcher": []
         },
         {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/ASPNETCore-OTP-SMS/OTPSMS.API/OTPSMS.API.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        }
+            "label": "build Infra AuthFactor",
+            "command": "dotnet build",
+            "type": "shell",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/2FAOTP.Infrastructure.AuthFactor",
+                "env": {
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build Infra Data",
+            "command": "dotnet build",
+            "type": "shell",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/2FAOTP.Infrastructure.Data",
+                "env": {
+                }
+            },
+            "problemMatcher": []
+        },
     ]
 }

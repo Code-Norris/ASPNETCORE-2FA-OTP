@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace OTPSMS.API
+namespace TwoFAOTP.Web.API
 {
     public class Program
     {

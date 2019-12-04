@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace OTPSMS.API.Controllers
+namespace TwoFAOTP.Web.API
 {
     [ApiController]
     [Route("api/otp/sms")]
@@ -17,7 +17,8 @@ namespace OTPSMS.API.Controllers
         }
 
         [HttpPost("send")]
-        public async Task Send(string phone)
+        public async Task Send(string uniqueUserName, string otpCode,
+            string phoneNumber, int otpExpiryInSeconds)
         {
             
         }
