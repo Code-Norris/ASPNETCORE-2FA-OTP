@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Serilog.Core;
 using TwoFAOTP.Infrastructure.AuthFactor;
 using TwoFAOTP.Infrastructure.Data;
 
@@ -13,10 +14,11 @@ namespace TwoFAOTP.Web.API
     [Route("api/otp/sms")]
     public class OTPController : ControllerBase
     {
-        public OTPController(IAuthFactor authFactor, IOTPCodeRepository otpCodeRepo)
+        public OTPController(IAuthFactor authFactor, IOTPCodeRepository otpCodeRepo, Logger logger)
         {
             _authFactor = authFactor;
             _otpCodeRepo = otpCodeRepo;
+            _logger = logger;
         }
 
         //Message is a template, %optcode% will be replaced with OTPCode
@@ -42,9 +44,9 @@ namespace TwoFAOTP.Web.API
         }
 
         [HttpGet("verify")]
-        public bool Verify(string uniqueUserName, string otpCode, string recipientPhoneNumber)
+        public bool Verify(string uniqueUserName, string otpCode)
         {
-            var optCodeInfo = _otpCodeRepo.GetOTPSentInfo(uniqueUserName, otpCode, recipientPhoneNumber);
+            var optCodeInfo = _otpCodeRepo.GetOTPSentInfo(uniqueUserName, otpCode);
 
             if(optCodeInfo == null)
             {
@@ -86,5 +88,6 @@ namespace TwoFAOTP.Web.API
 
         private IAuthFactor _authFactor;
         private IOTPCodeRepository _otpCodeRepo;
+        private Logger _logger;
     }
 }

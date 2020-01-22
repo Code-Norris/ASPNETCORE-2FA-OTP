@@ -10,7 +10,7 @@ namespace TwoFAOTP.Infrastructure.Data
              int otpExpiryInSeconds, DateTime otpCodeGenTime);
 
         OTPCodeInfo GetOTPSentInfo
-            (string uniqueUserName, string otpCode, string phoneNumber);
+            (string uniqueUserName, string otpCode);
 
         void UpdateSendCodeInfo(OTPCodeInfo otpCodeInfo);
     }

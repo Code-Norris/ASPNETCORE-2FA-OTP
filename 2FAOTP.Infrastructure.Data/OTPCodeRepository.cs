@@ -27,12 +27,12 @@ namespace TwoFAOTP.Infrastructure.Data
         }
 
         public OTPCodeInfo GetOTPSentInfo
-            (string uniqueUserName, string otpCode, string phoneNumber)
+            (string uniqueUserName, string otpCode)
         {
              var otpInfo = _ravendb
                 .Query<OTPCodeInfo>()
                 .SingleOrDefault(o => o.uniqueUserName == uniqueUserName &&
-                        o.OTPCode == otpCode && o.phoneNumber == phoneNumber && o.Verified == false);
+                        o.OTPCode == otpCode && o.Verified == false);
         
             return otpInfo;
         }

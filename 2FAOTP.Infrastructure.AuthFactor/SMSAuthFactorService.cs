@@ -18,17 +18,15 @@ namespace TwoFAOTP.Infrastructure.AuthFactor
         {
             try
             {
+                TwilioClient.Init(_twilioAccountId, _twilioAuthToken);
+
+                var message = MessageResource.Create(
+                    body: smsMessage,
+                    from: new Twilio.Types.PhoneNumber(fromPhoneNumber),
+                    to: new Twilio.Types.PhoneNumber(recipientPhoneNumber)
+                );
+
                 return true;
-
-                // TwilioClient.Init(_twilioAccountId, _twilioAuthToken);
-
-                // var message = MessageResource.Create(
-                //     body: smsMessage,
-                //     from: new Twilio.Types.PhoneNumber(fromPhoneNumber),
-                //     to: new Twilio.Types.PhoneNumber(recipientPhoneNumber)
-                // );
-
-                // return true;
             }
             catch(Exception ex)
             {
